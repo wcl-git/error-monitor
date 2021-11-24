@@ -3,13 +3,17 @@
 ##### 安装
 ###### 版本V2.1.0
 ```
-npm install monitor-web --save
+npm install error-monitor --save
 ```
 ##### 导入
 功能分为`ErrrorWeb`异常监控, 和`AnalysisWeb`埋点分析两部分, 可根据需要导入
 ```javascript
-import {ErrrorWeb, AnalysisWeb} from 'monitor-web'
+import {ErrrorWeb, AnalysisWeb} from 'error-monitor'
 ```
+
+```
+也可以直接 build 把dist/index.js复制到项目中
+``
 
 #### 一、前端异常日志采集与上报
 
