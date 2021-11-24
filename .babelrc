@@ -1,0 +1,17 @@
+{
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "targets": {
+          "chrome": "58",
+          "ie": "10"
+        }
+      }
+    ]
+  ],
+  "plugins":[
+    "@babel/plugin-transform-runtime"
+    // "dynamic-import-node"
+  ]
+}

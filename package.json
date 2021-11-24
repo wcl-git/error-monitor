@@ -1,0 +1,43 @@
+{
+  "name": "error-monitor",
+  "dependencies": {
+    "@babel/cli": "^7.16.0",
+    "@babel/core": "^7.7.2",
+    "@babel/plugin-external-helpers": "^7.2.0",
+    "@babel/preset-env": "^7.7.1",
+    "@babel/node": "^7.16.0",
+    "@babel/plugin-transform-runtime": "^7.16.4",
+    "babel-eslint": "^8.2.1",
+    "babel-helper-vue-jsx-merge-props": "^2.0.3",
+    "babel-jest": "^21.0.2",
+    "babel-loader": "^8.2.3",
+    "core-js": "^3.19.1",
+    "regenerator-runtime": "^0.13.9",
+    "axios": "^0.19.0",
+    "express": "^4.16.4"
+  },
+  "description": "web前端监控及日志上报方案",
+  "version": "2.1.0",
+  "main": "dist/index.js",
+  "typings": "./index.d.ts",
+  "directories": {
+    "doc": "doc",
+    "test": "test"
+  },
+  "devDependencies": {
+    "url-loader": "^1.1.2",
+    "webpack": "^4.31.0",
+    "webpack-cli": "^3.3.2",
+    "webpack-dev-server": "^3.3.1",
+    "webpack-server": "^0.1.2",
+    "worker-loader": "^2.0.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "homepage": "https://github.com/wcl-git/error-monitor/blob/main/README"
+}
