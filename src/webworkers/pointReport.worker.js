@@ -14,5 +14,6 @@ let sendPoint = async (config, data) => {
 		delete  config.isHump
 		Fn.jsonToUnderline(data)
 	}
+	console.log(data, 'sydata');
 	await axios.post(config.url, data)
 };
