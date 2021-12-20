@@ -6,13 +6,13 @@ export class AnalysisWeb {
 		// 埋点配置
 		if (typeof config === 'object') {
 			if (typeof config.url !== 'string') {
-				throw new Error('Analysis初始化错误 - 构造函数的参数 url 必须是一个字符串！');
+				throw new Error('Analysis初始化错误 - 构造函数的参数 url 必须是一个字符串!');
 			}
 			if (!config.appid && typeof config.appid + '' !== 'string') {
-				throw new Error('Analysis初始化错误 - 构造函数的参数 config.appid 必须是一个有效字符串或数字！');
+				throw new Error('Analysis初始化错误 - 构造函数的参数 config.appid 必须是一个有效字符串或数字!');
 			}
 		} else {
-			throw new Error('Analysis初始化错误 - 构造函数的参数必须是一个对象！');
+			throw new Error('Analysis初始化错误 - 构造函数的参数必须是一个对象!');
 		}
 		// 创建埋点多线程处理
 		this.worker = new PointReportWorker();

@@ -22,11 +22,11 @@ export class ErrrorWeb {
     constructor(param) {
         let config = param;
         if (typeof config === 'undefined') {
-            throw new Error('ErrrorWeb初始化错误 - 构造函数的参数不能为空！');
+            throw new Error('ErrrorWeb初始化错误 - 构造函数的参数不能为空!');
         }
         if (typeof config === 'object') {
             if (typeof param.url !== 'string') {
-                throw new Error('ErrrorWeb初始化错误 - 构造函数的参数 url 必须是一个字符串！');
+                throw new Error('ErrrorWeb初始化错误 - 构造函数的参数 url 必须是一个字符串!');
             }
             if (typeof param.maxRetryCount !== 'number') {
                 config.maxRetryCount = 5
@@ -35,16 +35,16 @@ export class ErrrorWeb {
                 config.reportingCycle = 10000
             }
             if (typeof param.appName !== 'string') {
-                throw new Error('ErrrorWeb初始化错误 - 构造函数的参数 appName 必须是一个字符串！');
+                throw new Error('ErrrorWeb初始化错误 - 构造函数的参数 appName 必须是一个字符串!');
             }
             if (typeof param.appid !== 'string') {
-                throw new Error('ErrrorWeb初始化错误 - 构造函数的参数 appid 必须是一个字符串！');
+                throw new Error('ErrrorWeb初始化错误 - 构造函数的参数 appid 必须是一个字符串!');
             }
             if (typeof param.isLog !== 'boolean') {
                 config.isLog = true
             }
         } else {
-            throw new Error('ErrrorWeb初始化错误 - 构造函数的参数格式不正确！');
+            throw new Error('ErrrorWeb初始化错误 - 构造函数的参数格式不正确!');
         }
 
         // 日志最大存储与上报数量
@@ -161,7 +161,7 @@ export class ErrrorWeb {
             appName: this.config.appName,
             appid: this.config.appid,
             performance: Fn.formatPerformance(performance),
-            id: Fn.getReqId() + '-' + Number(Math.random().toString().substr(2)).toString(36),
+            id: Fn.getReqId() + '-' + Number(Math.random().toString().substring(2)).toString(36),
             uuid: this.uuid
         };
         this.queue.unshift(log);
@@ -228,7 +228,7 @@ export class ErrrorWeb {
                 appName: this.config.appName,
                 appid: this.config.appid,
                 performance: Fn.formatPerformance(performance),
-                id: Fn.getReqId() + '-' + Number(Math.random().toString().substr(2)).toString(36),
+                id: Fn.getReqId() + '-' + Number(Math.random().toString().substring(2)).toString(36),
                 uuid: this.uuid
             };
             this.queue.unshift(log);
@@ -254,7 +254,7 @@ export class ErrrorWeb {
                 appName: this.config.appName,
                 appid: this.config.appid,
                 performance: Fn.formatPerformance(performance),
-                id: Fn.getReqId() + '-' + Number(Math.random().toString().substr(2)).toString(36),
+                id: Fn.getReqId() + '-' + Number(Math.random().toString().substring(2)).toString(36),
                 uuid: this.uuid
             };
             this.queue.unshift(log);
@@ -305,11 +305,11 @@ export class ErrrorWeb {
                                 if (this.status >= 200 && this.status < 400) {
                                     messages.push('接口请求成功。');
                                 } else {
-                                    messages.push('接口请求失败！');
+                                    messages.push('接口请求失败!');
                                 }
-                                messages.push(`请求耗时：${costTime}s URL：${this._ErrrorWebUrl} 请求方式：${this._ErrrorWebMethod}`);
+                                messages.push(`请求耗时:${costTime}s URL:${this._ErrrorWebUrl} 请求方式:${this._ErrrorWebMethod}`);
                                 if (this._ErrrorWebMethod.toLowerCase() === 'post') {
-                                    messages.push('表单数据：', data);
+                                    messages.push('表单数据:', data);
                                 }
                                 if (data) {
                                     ajaxErrorJSON.requestBody = data
@@ -319,8 +319,8 @@ export class ErrrorWeb {
                                 ajaxErrorJSON.spendTime = costTime
                                 ajaxErrorJSON.requestUrl = this._ErrrorWebUrl
                                 ajaxErrorJSON.method = this._ErrrorWebMethod
-                                messages.push(`状态码：${this.status}`);
-                                messages.push(`返回数据：${this.response}`);
+                                messages.push(`状态码:${this.status}`);
+                                messages.push(`返回数据: ${this.response}`);
                                 if (this.status >= 200 && this.status < 400) {
                                     // 暂不记录请求成功的状态
                                     // that.info('[ajax]', ...messages);
@@ -341,10 +341,10 @@ export class ErrrorWeb {
 
                             const ajaxErrorJSON = {}
                             const messages = [];
-                            messages.push('接口请求出错！');
-                            messages.push(`URL：${this._ErrrorWebUrl} 请求方式：${this._ErrrorWebMethod}`);
+                            messages.push('接口请求出错!');
+                            messages.push(`URL:${this._ErrrorWebUrl} 请求方式:${this._ErrrorWebMethod}`);
                             if (this._ErrrorWebMethod.toLowerCase() === 'post') {
-                                messages.push('表单数据：', data);
+                                messages.push('表单数据:', data);
                             }
                             if (data) {
                                 ajaxErrorJSON.requestBody = data
@@ -354,9 +354,9 @@ export class ErrrorWeb {
                             ajaxErrorJSON.spendTime = costTime
                             ajaxErrorJSON.requestUrl = this._ErrrorWebUrl
                             ajaxErrorJSON.method = this._ErrrorWebMethod
-                            messages.push(`状态码：${this.status}`);
-                            messages.push(`返回数据：${this.response}`);
-                            messages.push(`ERROR：${err}`);
+                            messages.push(`状态码:${this.status}`);
+                            messages.push(`返回数据:${this.response}`);
+                            messages.push(`ERROR:${err}`);
                             that.error(ajaxErrorJSON, '[ajax]', ...messages);
                         }
                     }
@@ -374,7 +374,7 @@ export class ErrrorWeb {
             window.webkitPerformance;
         this.queue.unshift({
             logType: '[ajax]',
-            id: `${Fn.getReqId() + '-' + Number(Math.random().toString().substr(2)).toString(36)}`,
+            id: `${Fn.getReqId() + '-' + Number(Math.random().toString().substring(2)).toString(36)}`,
             time: new Date().getTime(),
             timeLocalString: Fn._getDateTimeString(new Date()),
             appName: this.config.appName,
@@ -460,8 +460,9 @@ export class ErrrorWeb {
             if (event.data === ErrrorWeb.workerEnmu.retry) {
                 if (this.retryCount >= this.config.maxRetryCount) {
                     clearInterval(this.timer);
+                    this.timer = null;
                     this.sendStatus = ErrrorWeb.workerEnmu.ready;
-                    if (this.config.isLog) console.error(`发送日志请求的连续失败次数过多，已停止发送日志。请检查日志接口 ${this.url} 是否正常！`);
+                    if (this.config.isLog) console.error(`发送日志请求的连续失败次数过多，已停止发送日志。请检查日志接口 ${this.url} 是否正常!`);
                 } else {
                     if (this.config.isLog) console.warn('配置地址[' + this.config.url + ']上报失败, 等待下次重试 ' + this.retryCount + '...');
                     !this.isFile ? await idb.delete('ErrrorWeb') : null;

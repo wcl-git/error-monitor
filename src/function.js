@@ -72,30 +72,14 @@ function formatPerformance (performance) {
 		let memory = performance.memory;
 		return {
 			times: {
-				readyStart: {
-					value: timing.fetchStart - timing.navigationStart,
-					desc: "准备新页面时间耗时"
-				},
-				redirectTime: {
-					value: timing.redirectEnd - timing.redirectStart,
-					desc: "重定向耗时"
-				},
-				appcacheTime: {
-					value: timing.domainLookupStart - timing.fetchStart,
-					desc: "Appcache 耗时"
-				},
-				unloadEventTime: {
-					value: timing.unloadEventEnd - timing.unloadEventStart,
-					desc: "unload 前文档耗时"
-				},
-				lookupDomainTime: {
-					value: timing.domainLookupEnd - timing.domainLookupStart,
-					desc: "DNS 查询耗时"
-				},
-				connectTime: {
-					value: timing.connectEnd - timing.connectStart,
-					desc: "TCP连接耗时"
-				},
+				// lookupDomainTime: {
+				// 	value: timing.domainLookupEnd - timing.domainLookupStart,
+				// 	desc: "DNS 查询耗时"
+				// },
+				// connectTime: {
+				// 	value: timing.connectEnd - timing.connectStart,
+				// 	desc: "TCP连接耗时"
+				// },
 				requestTime: {
 					value: timing.responseEnd - timing.requestStart,
 					desc: "request请求耗时"

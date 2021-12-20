@@ -5,6 +5,6 @@
 // import "babel-polyfill"
 import "core-js/stable";
 import "regenerator-runtime/runtime";
-import {ErrrorWeb} from './monitor-web'
+import {ErrrorWeb} from './error-web'
 import {AnalysisWeb} from './analysis-web'
 export {AnalysisWeb, ErrrorWeb}
