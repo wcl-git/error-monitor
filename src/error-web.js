@@ -130,6 +130,9 @@ export class ErrrorWeb {
         // 自动记录ajax请求异常
         this.ajaxHandler();
 
+        // cosnole.error
+        this.rewriteConsoleError();
+
         //清理历史log
         this.clearHistory();
 
@@ -145,7 +148,7 @@ export class ErrrorWeb {
             window.msPerformance ||
             window.webkitPerformance;
         let log = {
-            logType: '[onError]',
+            logType: '[customError]',
             messages: error.message || null,
             errorType: error.name,
             path: location.href || null,
@@ -204,11 +207,13 @@ export class ErrrorWeb {
             });
         });
     }
+    // 
 
     // 自动捕获异常
     exceptionHandler () {
+        var that = this;
         // 页面onerror捕获异常
-        window.addEventListener('error', (error) => {
+        window.addEventListener('error', function(error) {
             let performance = window.performance ||
                 window.msPerformance ||
                 window.webkitPerformance;
@@ -223,43 +228,43 @@ export class ErrrorWeb {
                 isTrusted: error.isTrusted || null,
                 time: new Date().getTime(),
                 timeLocalString: Fn._getDateTimeString(new Date()),
-                clickEvents: [...this.clickEvents] || null,
+                clickEvents: [...that.clickEvents] || null,
                 userAgent: navigator.userAgent || null,
-                appName: this.config.appName,
-                appid: this.config.appid,
+                appName: that.config.appName,
+                appid: that.config.appid,
                 performance: Fn.formatPerformance(performance),
                 id: Fn.getReqId() + '-' + Number(Math.random().toString().substring(2)).toString(36),
-                uuid: this.uuid
+                uuid: that.uuid
             };
-            this.queue.unshift(log);
-            if (this.retryCount >= this.config.maxRetryCount) {
-                this.send()
+            that.queue.unshift(log);
+            if (that.retryCount >= that.config.maxRetryCount) {
+                that.send()
             }
         });
 
         // Promise捕获异常
-        window.addEventListener('unhandledrejection', (event) => {
+        window.addEventListener('unhandledrejection', function(event) {
             let performance = window.performance ||
                 window.msPerformance ||
                 window.webkitPerformance;
             let log = {
-                logType: '[onError]',
+                logType: '[promiseError]',
                 messages: event.reason || null,
                 path: window.location.href || null,
                 errorType: 'PromiseError',
                 userAgent: navigator.userAgent || null,
                 time: new Date().getTime(),
                 timeLocalString: Fn._getDateTimeString(new Date()),
-                clickEvents: [...this.clickEvents] || null,
-                appName: this.config.appName,
-                appid: this.config.appid,
+                clickEvents: [...that.clickEvents] || null,
+                appName: that.config.appName,
+                appid: that.config.appid,
                 performance: Fn.formatPerformance(performance),
                 id: Fn.getReqId() + '-' + Number(Math.random().toString().substring(2)).toString(36),
-                uuid: this.uuid
+                uuid: that.uuid
             };
-            this.queue.unshift(log);
-            if (this.retryCount >= this.config.maxRetryCount) {
-                this.send()
+            that.queue.unshift(log);
+            if (that.retryCount >= that.config.maxRetryCount) {
+                that.send()
             }
         });
     }
@@ -392,6 +397,44 @@ export class ErrrorWeb {
             this.send()
         }
     }
+    // 重写console.error
+    rewriteConsoleError() {
+        var that = this;
+        window.console._error = window.console.error;
+        window.console.error = function(error) {
+            console.log(error , 'error');
+        // 在这里执行错误存储或发送
+        let performance = window.performance ||
+            window.msPerformance ||
+            window.webkitPerformance;
+        let log = {
+            logType: '[consoleError]',
+            messages: typeof errror === 'string' ? error : error.message || null,
+            errorType: error.name,
+            path: location.href || null,
+            lineNo: error.line || null,
+            columnNo: error.column || null,
+            error: error.stack || null,
+            script: error.script || null,
+            isTrusted: error.isTrusted || null,
+            time: new Date().getTime(),
+            timeLocalString: Fn._getDateTimeString(new Date()),
+            clickEvents: [...that.clickEvents] || null,
+            userAgent: navigator.userAgent || null,
+            appName: that.config.appName,
+            appid: that.config.appid,
+            performance: Fn.formatPerformance(performance),
+            id: Fn.getReqId() + '-' + Number(Math.random().toString().substring(2)).toString(36),
+            uuid: that.uuid
+        };
+        that.queue.unshift(log);
+        if (that.retryCount >= that.config.maxRetryCount) {
+            that.send()
+        }
+        window.console._error(error);
+    };
+    }
+    
 
     //处理日志队列
     send () {
